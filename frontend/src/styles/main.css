@@ -1,0 +1,369 @@
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f7f8fa;
+  --bg-tertiary: #f0f2f5;
+  --bg-hover: #ebedf0;
+  --bg-active: #e1e4e8;
+  --bg-selected: #e8f0fe;
+  --border: #e4e7eb;
+  --border-strong: #d0d5dd;
+  --text-primary: #1f2329;
+  --text-secondary: #646a73;
+  --text-muted: #8f959e;
+  --accent: #3370ff;
+  --accent-hover: #245bdb;
+  --accent-light: #e8f0fe;
+  --success: #34c759;
+  --success-bg: #e8f7ec;
+  --warning: #ff9500;
+  --danger: #ff3b30;
+  --danger-bg: #ffeceb;
+  --sidebar-width: 260px;
+  --ai-panel-width: 340px;
+  --menubar-height: 32px;
+  --toolbar-height: 40px;
+  --statusbar-height: 26px;
+  --tab-height: 32px;
+  --radius: 4px;
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 13px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  min-height: 100%;
+  height: 100%;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow: hidden;
+}
+
+html.has-custom-bg,
+html.has-custom-bg body,
+html.has-custom-bg #app {
+  background: transparent;
+}
+
+#opendb-bg-layer {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#opendb-bg-layer,
+#opendb-bg-layer * {
+  pointer-events: none !important;
+}
+
+#opendb-bg-layer img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+#opendb-bg-layer.cover img {
+  object-fit: cover;
+}
+
+#opendb-bg-layer.contain img {
+  object-fit: contain;
+  background: #000;
+}
+
+#opendb-bg-layer.tile {
+  background-position: center;
+  background-repeat: repeat;
+  background-size: auto;
+}
+
+html.has-custom-bg #app {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+html.has-custom-bg .app-shell {
+  background: transparent;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Keep chrome above workspace backdrop layers so menu/toolbar stay clickable */
+html.has-custom-bg .menu-bar {
+  position: relative;
+  z-index: 40;
+  isolation: isolate;
+}
+
+html.has-custom-bg .toolbar,
+html.has-custom-bg .status-bar {
+  position: relative;
+  z-index: 30;
+  isolation: isolate;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+select,
+textarea {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(51, 112, 255, 0.15);
+}
+
+.btn {
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.btn-secondary {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--bg-hover);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: transparent;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.btn-danger {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border-color: #ffc9c5;
+}
+
+.scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #c8ccd0 transparent;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #c8ccd0;
+  border-radius: 999px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a8adb3;
+}
+
+.markdown-body pre {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px;
+  overflow: auto;
+}
+
+.markdown-body code {
+  font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  font-size: 12px;
+}
+
+.markdown-body p {
+  margin: 0 0 8px;
+}
+
+.markdown-body ul {
+  margin: 0 0 8px 18px;
+}
+
+.cm-editor {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.cm-editor .cm-selectionBackground,
+.cm-editor.cm-focused .cm-selectionBackground {
+  background: rgba(51, 112, 255, 0.18) !important;
+}
+
+.cm-editor .cm-activeLine {
+  background: rgba(51, 112, 255, 0.05);
+}
+
+.cm-editor .cm-gutters {
+  background: var(--bg-secondary) !important;
+  border-right: 1px solid var(--border) !important;
+}
+
+.cm-tooltip-autocomplete {
+  background: var(--bg-primary) !important;
+  border: 1px solid var(--border-strong) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.panel-splitter {
+  background: var(--border);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  touch-action: none;
+}
+
+.panel-splitter::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+}
+
+.panel-splitter:hover,
+.panel-splitter.active {
+  background: var(--accent);
+}
+
+.panel-splitter-h {
+  height: 4px;
+  cursor: row-resize;
+}
+
+.panel-splitter-h::before {
+  top: -4px;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+}
+
+.panel-splitter-v {
+  width: 4px;
+  cursor: col-resize;
+}
+
+.panel-splitter-v::before {
+  top: 0;
+  bottom: 0;
+  left: -4px;
+  right: -4px;
+}
+
+html.has-custom-bg .object-panel,
+html.has-custom-bg .ai-panel,
+html.has-custom-bg .workspace-panel,
+html.has-custom-bg .editor-section,
+html.has-custom-bg .result-section,
+html.has-custom-bg .panel-title-bar,
+html.has-custom-bg .result-header,
+html.has-custom-bg .detail-panel,
+html.has-custom-bg .detail-tabs,
+html.has-custom-bg .tab-bar,
+html.has-custom-bg .quick-commands,
+html.has-custom-bg .editor-footer,
+html.has-custom-bg .editor-actions,
+html.has-custom-bg .grid-toolbar,
+html.has-custom-bg .sql-editor,
+html.has-custom-bg .cm-editor,
+html.has-custom-bg .cm-editor .cm-gutters {
+  backdrop-filter: blur(var(--custom-bg-blur, 10px));
+  -webkit-backdrop-filter: blur(var(--custom-bg-blur, 10px));
+}
+
+html.has-custom-bg .menu-bar,
+html.has-custom-bg .toolbar,
+html.has-custom-bg .status-bar {
+  background: rgba(255, 255, 255, var(--custom-panel-opacity, 0.88)) !important;
+}
+
+html.has-custom-bg .object-panel,
+html.has-custom-bg .ai-panel,
+html.has-custom-bg .workspace-panel,
+html.has-custom-bg .center-panel,
+html.has-custom-bg .editor-section,
+html.has-custom-bg .result-section,
+html.has-custom-bg .detail-panel,
+html.has-custom-bg .panel-content,
+html.has-custom-bg .sql-editor {
+  background: rgba(247, 248, 250, var(--custom-panel-opacity, 0.88)) !important;
+}
+
+html.has-custom-bg .panel-title-bar,
+html.has-custom-bg .result-header,
+html.has-custom-bg .detail-tabs,
+html.has-custom-bg .tab-bar,
+html.has-custom-bg .quick-commands,
+html.has-custom-bg .editor-footer,
+html.has-custom-bg .editor-actions,
+html.has-custom-bg .grid-toolbar {
+  background: rgba(240, 242, 245, var(--custom-panel-opacity, 0.88)) !important;
+}
+
+html.has-custom-bg .cm-editor {
+  background: rgba(255, 255, 255, var(--custom-panel-opacity, 0.92)) !important;
+}
+
+html.has-custom-bg .cm-editor .cm-gutters {
+  background: rgba(247, 248, 250, var(--custom-panel-opacity, 0.92)) !important;
+}

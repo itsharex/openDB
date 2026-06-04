@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: opendb-server
+
+opendb:
+  ai:
+    enabled: ${OPENDDB_AI_ENABLED:false}
+    api-url: ${OPENDDB_AI_API_URL:https://api.openai.com/v1/chat/completions}
+    api-key: ${OPENDDB_AI_API_KEY:}
+    model: ${OPENDDB_AI_MODEL:gpt-4o-mini}
+    timeout-seconds: 60
+  connection:
+    max-pool-size: 5
+    query-timeout-seconds: 30
+
+logging:
+  level:
+    com.opendb: INFO
