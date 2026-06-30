@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  release:
+  build:
     strategy:
       fail-fast: false
       matrix:
@@ -34,6 +34,10 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
+
+      - name: Install Linux packaging dependencies
+        if: matrix.platform == 'linux'
+        run: sudo apt-get update && sudo apt-get install -y libfuse2 fakeroot rpm
 
       - name: Prepare bundled JRE
         shell: bash
@@ -63,11 +67,31 @@ jobs:
             npm run dist:linux
           fi
 
-      - name: Upload release assets
+      - name: Upload platform artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: desktop-${{ matrix.platform }}
+          path: desktop/dist/**
+          if-no-files-found: error
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all platform artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-artifacts
+          merge-multiple: true
+
+      - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: desktop/dist/**/*
-          generate_release_notes: ${{ matrix.platform == 'linux' }}
-          fail_on_unmatched_files: false
+          files: release-artifacts/**
+          generate_release_notes: true
+          fail_on_unmatched_files: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

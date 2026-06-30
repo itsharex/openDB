@@ -6,6 +6,8 @@ directories:
   output: dist
   buildResources: build
 
+icon: build/icon.png
+
 files:
   - main.js
   - preload.js

@@ -35,6 +35,10 @@ logs/
 .env
 *.pem
 
+# Unrelated / local-only docs
+docs/promo/
+.cursor/plans/
+
 # Desktop
 desktop/node_modules/
 desktop/dist/
